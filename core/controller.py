@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from core.page import *
 import configparser
+import time
 
 
 class SMTBDirect:
@@ -17,11 +18,8 @@ class SMTBDirect:
             self.config.read(config_file)
 
     def login(self):
-
-        # self._driver.get("https://direct.smtb.jp/ap1/ib/login.do")
-
-        self.current_page.input_member()
-        self.current_page.input_password()
+        self.current_page.input_member(self.config.get("account", "member_num"))
+        self.current_page.input_password(self.config.get("account", "password"))
         self.current_page = self.current_page.click_login()
 
     def transfer(self, number: int, amount: int, name=None):
@@ -39,5 +37,11 @@ class SMTBDirect:
 
             self.current_page = self.current_page.click_next()
 
-            c = self.current_page.confirms()
-            print(c)
+            labels = self.current_page.confirms()
+
+            self.current_page.input_passcode(
+                self.config.get("passcode", labels[0]),
+                self.config.get("passcode", labels[1]),
+                self.config.get("passcode", labels[2]),
+            )
+            self.current_page.click_confirm()

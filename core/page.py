@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from core.locator import *
-from core.params import MEMBER_NUM, PASSWORD
 import mojimoji
 
 
@@ -12,11 +11,11 @@ class BasePage:
 class LoginPage(BasePage):
     _locator = LoginPageLocator()
 
-    def input_member(self, member_num=MEMBER_NUM):
+    def input_member(self, member_num):
         element = self._driver.find_element(*self._locator.INPUT_MEMBER)
         element.send_keys(member_num)
 
-    def input_password(self, password=PASSWORD):
+    def input_password(self, password):
         element = self._driver.find_element(*self._locator.INPUT_PASSWORD)
         element.send_keys(password)
 
@@ -84,3 +83,18 @@ class TransferConfirmPage(BasePage):
         element = self._driver.find_element(*self._locator.TEXT_PASSCODE_3)
         result.append(mojimoji.zen_to_han(element.text))
         return result
+
+    def input_passcode(self, code1, code2, code3):
+        element = self._driver.find_element(*self._locator.INPUT_PASSCODE_1)
+        element.send_keys(code1)
+
+        element = self._driver.find_element(*self._locator.INPUT_PASSCODE_2)
+        element.send_keys(code2)
+
+        element = self._driver.find_element(*self._locator.INPUT_PASSCODE_3)
+        element.send_keys(code3)
+
+    def click_confirm(self):
+        element = self._driver.find_element(*self._locator.BUTTON_CONFIRM)
+        element.click()
+        return
