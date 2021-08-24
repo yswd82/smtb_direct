@@ -1,1 +1,3 @@
-from smtb_direct.core import controller
+from .locator import *
+from .controller import *
+from .page import *

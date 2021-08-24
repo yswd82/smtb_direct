@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from smtb_direct.core.locator import *
+from core.locator import *
+from core.params import MEMBER_NUM, PASSWORD
+import mojimoji
 
 
 class BasePage:
@@ -8,9 +10,77 @@ class BasePage:
 
 
 class LoginPage(BasePage):
+    _locator = LoginPageLocator()
 
-    _locator = LoginPageLocator
+    def input_member(self, member_num=MEMBER_NUM):
+        element = self._driver.find_element(*self._locator.INPUT_MEMBER)
+        element.send_keys(member_num)
+
+    def input_password(self, password=PASSWORD):
+        element = self._driver.find_element(*self._locator.INPUT_PASSWORD)
+        element.send_keys(password)
 
     def click_login(self):
         element = self._driver.find_element(*self._locator.BUTTON_LOGIN)
         element.click()
+        return MenuPage(self._driver)
+
+
+class MenuPage(BasePage):
+    _locator = MenuPageLocator()
+
+    def click_logout(self):
+        element = self._driver.find_element(*self._locator.BUTTON_LOGOUT)
+        element.click()
+
+    def click_transaction(self):
+        element = self._driver.find_element(*self._locator.BUTTON_TRANSACTION)
+        element.click()
+        return TransactionPage(self._driver)
+
+
+class TransactionPage(BasePage):
+    _locator = TransactionPageLocator()
+
+    def click_transfer(self):
+        element = self._driver.find_element(*self._locator.BUTTON_TRANSFER)
+        element.click()
+        return TransferPage(self._driver)
+
+
+class TransferPage(BasePage):
+    _locator = TransferPageLocator()
+
+    def select_check(self, number):
+        element = self._driver.find_element(*self._locator.check(number))
+        element.click()
+
+    def input_amount(self, amount):
+        element = self._driver.find_element(*self._locator.INPUT_AMOUNT)
+        element.send_keys(amount)
+
+    def input_client_name(self, name):
+        element = self._driver.find_element(*self._locator.INPUT_CLIENT_NAME)
+        element.send_keys(name)
+
+    def click_next(self):
+        element = self._driver.find_element(*self._locator.BUTTON_NEXT)
+        element.click()
+        return TransferConfirmPage(self._driver)
+
+
+class TransferConfirmPage(BasePage):
+    _locator = TransferConfirmPageLocator()
+
+    def confirms(self):
+        result = []
+
+        element = self._driver.find_element(*self._locator.TEXT_PASSCODE_1)
+        result.append(mojimoji.zen_to_han(element.text))
+
+        element = self._driver.find_element(*self._locator.TEXT_PASSCODE_2)
+        result.append(mojimoji.zen_to_han(element.text))
+
+        element = self._driver.find_element(*self._locator.TEXT_PASSCODE_3)
+        result.append(mojimoji.zen_to_han(element.text))
+        return result
