@@ -7,6 +7,7 @@ driver = webdriver.Chrome(executable_path=CHROME_PATH)
 
 myhp = SMTBDirect(driver, config_file="config.ini")
 
+# 11番目の振込先に1円振込
 myhp.login()
 myhp.transfer(11, 1)
 myhp.logout()
