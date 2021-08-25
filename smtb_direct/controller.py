@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from core.page import *
+from smtb_direct.page import *
 import configparser
-import time
 
 
 class SMTBDirect:
@@ -23,15 +22,12 @@ class SMTBDirect:
         self.current_page = self.current_page.click_login()
 
     def transfer(self, number: int, amount: int, name=None):
-
         if isinstance(self.current_page, MenuPage):
-
             self.current_page = self.current_page.click_transaction()
-
             self.current_page = self.current_page.click_transfer()
-
             self.current_page.select_check(number)
             self.current_page.input_amount(amount)
+
             if name:
                 self.current_page.input_client_name(name)
 
@@ -44,4 +40,9 @@ class SMTBDirect:
                 self.config.get("passcode", labels[1]),
                 self.config.get("passcode", labels[2]),
             )
-            self.current_page.click_confirm()
+            self.current_page = self.current_page.click_confirm()
+
+    def logout(self):
+        if isinstance(self.current_page, TransferCompletePage):
+            self.current_page.click_logout()
+            self._driver.quit()

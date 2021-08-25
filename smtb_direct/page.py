@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from core.locator import *
+from smtb_direct.locator import *
 import mojimoji
 
 
@@ -97,4 +97,12 @@ class TransferConfirmPage(BasePage):
     def click_confirm(self):
         element = self._driver.find_element(*self._locator.BUTTON_CONFIRM)
         element.click()
-        return
+        return TransferCompletePage(self._driver)
+
+
+class TransferCompletePage(BasePage):
+    _locator = TransferCompletePageLocator()
+
+    def click_logout(self):
+        element = self._driver.find_element(*self._locator.BUTTON_LOGOUT)
+        element.click()

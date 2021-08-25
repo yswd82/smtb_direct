@@ -1,5 +1,5 @@
 from selenium import webdriver
-from core.controller import *
+from smtb_direct.controller import *
 
 CHROME_PATH = "bin\\chromedriver.exe"
 
@@ -9,3 +9,4 @@ myhp = SMTBDirect(driver, config_file="config.ini")
 
 myhp.login()
 myhp.transfer(11, 1)
+myhp.logout()
