@@ -54,6 +54,10 @@ class TransferPage(BasePage):
         element = self._driver.find_element(*self._locator.check(number))
         element.click()
 
+    def get_transferinfo(self, number):
+        pass
+    TODO:
+
     def input_amount(self, amount):
         element = self._driver.find_element(*self._locator.INPUT_AMOUNT)
         element.send_keys(amount)

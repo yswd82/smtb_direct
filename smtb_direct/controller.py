@@ -17,14 +17,20 @@ class SMTBDirect:
             self.config.read(config_file)
 
     def login(self):
-        self.current_page.input_member(self.config.get("account", "member_num"))
-        self.current_page.input_password(self.config.get("account", "password"))
+        self.current_page.input_member(
+            self.config.get("account", "member_num"))
+        self.current_page.input_password(
+            self.config.get("account", "password"))
         self.current_page = self.current_page.click_login()
 
     def get_transferinfo(self, number: int):
         if isinstance(self.current_page, MenuPage):
             self.current_page = self.current_page.click_transaction()
             self.current_page = self.current_page.click_transfer()
+
+            print(
+                self.current_page.
+            )
 
     def transfer(self, number: int, amount: int, name=None):
         if isinstance(self.current_page, MenuPage):
