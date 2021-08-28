@@ -21,6 +21,11 @@ class SMTBDirect:
         self.current_page.input_password(self.config.get("account", "password"))
         self.current_page = self.current_page.click_login()
 
+    def get_transferinfo(self, number: int):
+        if isinstance(self.current_page, MenuPage):
+            self.current_page = self.current_page.click_transaction()
+            self.current_page = self.current_page.click_transfer()
+
     def transfer(self, number: int, amount: int, name=None):
         if isinstance(self.current_page, MenuPage):
             self.current_page = self.current_page.click_transaction()

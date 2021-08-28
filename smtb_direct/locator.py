@@ -45,6 +45,13 @@ class TransferPageLocator:
             f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td.data-table1-td1 > input[type=radio]",
         )
 
+    def text_(self, number):
+        i=number + 2
+        return (
+            By.CSS_SELECTOR,
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child(3) > td:nth-child(2)"
+        )
+        "#hurikomisaki_jizen > table > tbody > tr:nth-child(4) > td:nth-child(2)"
     INPUT_AMOUNT = (
         By.CSS_SELECTOR,
         "#content-main > tbody > tr > td:nth-child(2) > table:nth-child(12) > tbody > tr:nth-child(3) > td > table > tbody > tr > td > span > input",
@@ -57,6 +64,8 @@ class TransferPageLocator:
         By.CSS_SELECTOR,
         "#btn-bottom > tbody > tr > td:nth-child(3) > span > input[type=button]",
     )
+
+
 
 
 class TransferConfirmPageLocator:
