@@ -49,36 +49,35 @@ class TransferPageLocator:
         i = number + 2
         return (
             By.CSS_SELECTOR,
-            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(2)"
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(2)",
         )
 
     def branch_name(self, number):
-        i = number+2
+        i = number + 2
         return (
             By.CSS_SELECTOR,
-            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(3)"
-
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(3)",
         )
 
-    def account_type(self, name):
-        i = number+2
+    def account_type(self, number):
+        i = number + 2
         return (
             By.CSS_SELECTOR,
-            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(4)"
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(4)",
         )
 
-    def account_number(self, name):
-        i = number+2
+    def account_number(self, number):
+        i = number + 2
         return (
             By.CSS_SELECTOR,
-            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(5)"
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(5)",
         )
 
-    def account_name(self, name):
-        i = number+2
+    def account_name(self, number):
+        i = number + 2
         return (
             By.CSS_SELECTOR,
-            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(6)"
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(6)",
         )
 
     INPUT_AMOUNT = (
