@@ -54,26 +54,6 @@ class TransferPage(BasePage):
         element = self._driver.find_element(*self._locator.check(number))
         element.click()
 
-    def bank_name(self, number):
-        element = self._driver.find_element(*self._locator.bank_name(number))
-        return element.text
-
-    def branch_name(self, number):
-        element = self._driver.find_element(*self._locator.branch_name(number))
-        return element.text
-
-    def account_type(self, number):
-        element = self._driver.find_element(*self._locator.account_type(number))
-        return element.text
-
-    def account_number(self, number):
-        element = self._driver.find_element(*self._locator.account_number(number))
-        return element.text
-
-    def account_name(self, number):
-        element = self._driver.find_element(*self._locator.account_name(number))
-        return element.text
-
     def input_amount(self, amount):
         element = self._driver.find_element(*self._locator.INPUT_AMOUNT)
         element.send_keys(amount)
