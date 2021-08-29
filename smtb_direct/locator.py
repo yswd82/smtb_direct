@@ -45,6 +45,41 @@ class TransferPageLocator:
             f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td.data-table1-td1 > input[type=radio]",
         )
 
+    def bank_name(self, number):
+        i = number + 2
+        return (
+            By.CSS_SELECTOR,
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(2)",
+        )
+
+    def branch_name(self, number):
+        i = number + 2
+        return (
+            By.CSS_SELECTOR,
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(3)",
+        )
+
+    def account_type(self, number):
+        i = number + 2
+        return (
+            By.CSS_SELECTOR,
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(4)",
+        )
+
+    def account_number(self, number):
+        i = number + 2
+        return (
+            By.CSS_SELECTOR,
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(5)",
+        )
+
+    def account_name(self, number):
+        i = number + 2
+        return (
+            By.CSS_SELECTOR,
+            f"#hurikomisaki_jizen > table > tbody > tr:nth-child({i}) > td:nth-child(6)",
+        )
+
     INPUT_AMOUNT = (
         By.CSS_SELECTOR,
         "#content-main > tbody > tr > td:nth-child(2) > table:nth-child(12) > tbody > tr:nth-child(3) > td > table > tbody > tr > td > span > input",
