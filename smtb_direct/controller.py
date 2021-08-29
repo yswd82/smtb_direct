@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
-from smtb_direct.page import *
 import configparser
+from selenium.common.exceptions import NoSuchElementException
+from smtb_direct.page import *
+from dataclasses import dataclass
+
+
+@dataclass
+class Account:
+    bank_name: str
+    branch_name: str
+    account_type: str
+    account_number: str
+    account_name: str
 
 
 class SMTBDirect:
@@ -17,22 +28,38 @@ class SMTBDirect:
             self.config.read(config_file)
 
     def login(self):
-        self.current_page.input_member(self.config.get("account", "member_num"))
-        self.current_page.input_password(self.config.get("account", "password"))
+        self.current_page.input_member(
+            self.config.get("account", "member_num"))
+        self.current_page.input_password(
+            self.config.get("account", "password"))
         self.current_page = self.current_page.click_login()
 
-    def get_transferinfo(self, number: int):
+    def get_transferinfo(self, number: int = None):
         if isinstance(self.current_page, MenuPage):
             self.current_page = self.current_page.click_transaction()
             self.current_page = self.current_page.click_transfer()
 
-            print(
-                self.current_page.bank_name(number),
-                self.current_page.branch_name(number),
-                self.current_page.account_type(number),
-                self.current_page.account_number(number),
-                self.current_page.account_name(number),
-            )
+            result = []
+
+            for i in range(1, 100):
+                try:
+                    result.append(
+                        Account(
+                            self.current_page.bank_name(i),
+                            self.current_page.branch_name(i),
+                            self.current_page.account_type(i),
+                            self.current_page.account_number(i),
+                            self.current_page.account_name(i),
+                        )
+                    )
+                except NoSuchElementException as e:
+                    print(e)
+                    break
+
+            if number:
+                return result[number]
+            else:
+                return result
 
     def transfer(self, number: int, amount: int, name=None):
         if isinstance(self.current_page, MenuPage):

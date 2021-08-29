@@ -7,8 +7,13 @@ driver = webdriver.Chrome(executable_path=CHROME_PATH)
 
 myhp = SMTBDirect(driver, config_file="config.ini")
 
-# 1番目の振込先に1円振込
 myhp.login()
-myhp.get_transferinfo(11)
-myhp.transfer(11, 1)
+
+# 振込先を全部表示
+res = myhp.get_transferinfo()
+for r in res:
+    print(r)
+
+# 2番目の振込先に1円振込
+myhp.transfer(2, 1)
 myhp.logout()
