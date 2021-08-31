@@ -36,6 +36,21 @@ class TransactionPageLocator:
         "#content-main > tbody > tr > td:nth-child(2) > div.mcp-bk-hutuuu > table.data-table1 > tbody > tr:nth-child(3) > td.data-table1-td3.mcp-mtx-hutuuu-tetuzuki > table > tbody > tr:nth-child(5) > td > span > input[type=button]",
     )
 
+# TODO: 2口座以上ある場合
+    ACCOUNT_NUMBER = (
+        By.CSS_SELECTOR,
+        "#content-main > tbody > tr > td:nth-child(2) > div.mcp-bk-hutuuu > table.data-table1 > tbody > tr:nth-child(3) > td.data-table1-td1.mcp-mtx-hutuuu-kouzaNo"
+    )
+
+    ACCOUNT_TYPE = (
+        By.CSS_SELECTOR,
+        "#content-main > tbody > tr > td:nth-child(2) > div.mcp-bk-hutuuu > table.data-table1 > tbody > tr:nth-child(3) > td.data-table1-td2.mcp-mtx-hutuuu-tuutyouSyubetu"
+    )
+    ACCOUNT_BALANCE = (
+        By.CSS_SELECTOR,
+        "#content-main > tbody > tr > td:nth-child(2) > div.mcp-bk-hutuuu > table.data-table1 > tbody > tr:nth-child(3) > td.data-table1-td2.mcp-mtx-hutuuu-zandaka"
+    )
+
 
 class TransferPageLocator:
     def check(self, number):
