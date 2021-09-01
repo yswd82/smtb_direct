@@ -9,7 +9,7 @@ myhp = SMTBDirect(driver, config_file="config.ini")
 
 myhp.login()
 
-# 残高を表示
+# 口座情報を表示
 bl = myhp.get_balance()
 print(bl)
 
@@ -20,5 +20,5 @@ if res:
         print(r)
 
 # 2番目の振込先に1円振込
-myhp.transfer(11, 1)
+myhp.transfer(2, 1)
 myhp.logout()
