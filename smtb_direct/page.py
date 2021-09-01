@@ -46,6 +46,18 @@ class TransactionPage(BasePage):
         element.click()
         return TransferPage(self._driver)
 
+    def account_number(self):
+        element = self._driver.find_element(*self._locator.ACCOUNT_NUMBER)
+        return element.text
+
+    def account_type(self):
+        element = self._driver.find_element(*self._locator.ACCOUNT_TYPE)
+        return element.text
+
+    def account_balance(self):
+        element = self._driver.find_element(*self._locator.ACCOUNT_BALANCE)
+        return element.text
+
 
 class TransferPage(BasePage):
     _locator = TransferPageLocator()
@@ -63,15 +75,18 @@ class TransferPage(BasePage):
         return element.text
 
     def account_type(self, number):
-        element = self._driver.find_element(*self._locator.account_type(number))
+        element = self._driver.find_element(
+            *self._locator.account_type(number))
         return element.text
 
     def account_number(self, number):
-        element = self._driver.find_element(*self._locator.account_number(number))
+        element = self._driver.find_element(
+            *self._locator.account_number(number))
         return element.text
 
     def account_name(self, number):
-        element = self._driver.find_element(*self._locator.account_name(number))
+        element = self._driver.find_element(
+            *self._locator.account_name(number))
         return element.text
 
     def input_amount(self, amount):
