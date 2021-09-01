@@ -7,6 +7,13 @@ from dataclasses import dataclass
 
 @dataclass
 class Account:
+    account_number: str
+    account_type: str
+    account_balance: str
+
+
+@dataclass
+class TransferAccount:
     bank_name: str
     branch_name: str
     account_type: str
@@ -34,6 +41,16 @@ class SMTBDirect:
             self.config.get("account", "password"))
         self.current_page = self.current_page.click_login()
 
+    def get_balance(self):
+        if isinstance(self.current_page, MenuPage):
+            self.current_page = self.current_page.click_transaction()
+            result = Account(
+                self.current_page.account_number(),
+                self.current_page.account_type(),
+                self.current_page.account_balance(),
+            )
+            return result
+
     def get_transferinfo(self, number: int = None):
         if isinstance(self.current_page, MenuPage):
             self.current_page = self.current_page.click_transaction()
@@ -44,7 +61,7 @@ class SMTBDirect:
             for i in range(1, 100):
                 try:
                     result.append(
-                        Account(
+                        TransferAccount(
                             self.current_page.bank_name(i),
                             self.current_page.branch_name(i),
                             self.current_page.account_type(i),
